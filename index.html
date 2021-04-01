@@ -1,40 +1,126 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>CQ Slides</title>
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/white.css" id="theme">
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" id="highlight-theme">
+    <style>
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  color: #00aadd;
+  font-weight: bold;
+  text-transform: none;
+}
+#footer-right {
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  text-align: right;
+}
+.two-floating-elements > ol {
+  max-width: 50%;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.two-floating-elements > ul {
+  max-width: 50%;
+  float: left;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.two-floating-elements > ul ~ p {
+  max-width: 50%;
+  margin-top: 0;
+  margin-bottom: 0;
+  float: right;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.two-floating-elements > ul ~ p > img {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+    </style>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+  </head>
+  <body>
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+    <!-- Main content -->
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown="presentation.md"
+                 data-separator="^-----\n"
+                 data-separator-vertical="^---\n"
+                 data-separator-notes="^Notes:"
+                 data-charset="iso-8859-15">
+        </section>
+      </div>
+    </div>
+
+    <!-- Header and footer content (initially hidden) -->
+    <div id="hidden" style="display:none;">
+      <div id="headers-footers">
+        <div id="header-left">
+        </div>
+        <!--
+        <div id="header-right">
+          HEADER-RIGHT
+        </div>
+        -->
+        <div id="footer-left">
+        </div>
+        <div id="footer-right" style="width: 30%; text-align: left;">
+          <div style="color: grey; margin-bottom: 10px; font-size: 50%; white-space: nowrap">
+            LonoCloud team meeting &nbsp; &nbsp; 10 March 2021
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        slideNumber: true,
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+      });
+    </script>
+    <script>
+      // Add header/footer content
+      let hfs = document.getElementById('headers-footers')
+      if (window.location.search.match(/print-pdf/gi)) {
+        // For PDF export, add to each slide separately
+        Reveal.addEventListener('ready', (event) => {
+          let sbs = document.querySelectorAll('.slide-background')
+          for (let sb of sbs) {
+            sb.append(hfs.cloneNode(true))
+          }
+        })
+      } else {
+        // For normal mode, just add to the top global element
+        let dr = document.querySelector('div.reveal')
+        dr.append(hfs)
+      }
+    </script>
+  </body>
 </html>
+
