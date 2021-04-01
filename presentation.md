@@ -164,13 +164,13 @@ Notes:
 
 ```clojure [1-10]
 ;; cq                       ; jq
-                            ;
+
 (each (range j k))          ; range(j;k)
 
 (first [a b c])             ; [a,b,c] | first
 (first (collect a b c))     ; first(a,b,c)
 
-(some true? [a b c])        ; [a,b,                                                                                                 c] | any
+(some true? [a b c])        ; [a,b,c] | any
 (some pred [a b c])         ; [a,b,c] | any(pred)
 (some pred (collect a b c)) ; any(a,b,c;pred)
 ```
